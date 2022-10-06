@@ -6,13 +6,10 @@ during the release process.
 Why can't we just use `rev: stable` and call it a day? Well pre-commit
 won't auto update the hook as you may expect (and for good reasons, some
 technical and some pragmatic). Encouraging bad practice is also just
-not ideal. xref: https://github.com/psf/black/issues/420
 """
 
 import os
 import sys
-
-import commonmark
 import yaml
 from bs4 import BeautifulSoup
 
@@ -30,7 +27,6 @@ def main(changes: str, source_version_control: str) -> None:
         source_version_control_html, "html.parser"
     )
     pre_commit_repos = yaml.safe_load(
-        source_version_control_soup.find(class_="language-yaml").string
     )["repos"]
 
     for repo in pre_commit_repos:
